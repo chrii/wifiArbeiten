@@ -1,0 +1,25 @@
+Virtual Host lokal setzen:
+vhosts Datei von Apache editieren
+Wamp
+LM Wamp -> Apache -> httpd-vhosts.conf
+
+Beispiel:
+<VirtualHost *:80>
+  ServerName classicmodels.dv
+  DocumentRoot "${INSTALL_DIR}/www/classicmodels"
+  <Directory "${INSTALL_DIR}/www/classicmodels/">
+    Options +Indexes +Includes +FollowSymLinks +MultiViews
+    AllowOverride All
+    Require local
+  </Directory>
+</VirtualHost>
+
+Mamp:
+/Applications/MAMP/conf/apache/extra/httpd-vhosts.conf
+
+hosts file windows: 
+
+C:\Windows\System32\drivers\etc\hosts
+
+OSX
+/etc/hosts

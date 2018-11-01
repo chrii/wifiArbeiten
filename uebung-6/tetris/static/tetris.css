@@ -1,0 +1,29 @@
+.container.tetris {
+  width: 200px;
+  border-collapse: collapse;
+}
+
+.container.tetris > .row {
+}
+
+.container.tetris > .row > .col-sm {
+  border: 1px solid lightgrey;
+  border-left: 0;
+  border-bottom: 0;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.container.tetris > .row > .col-sm:first-child {
+  border-left: 1px solid lightgrey;
+}
+
+.container.tetris > .row:last-child > .col-sm {
+  border-bottom: 1px solid lightgrey;
+}
+
+.container.tetris > .row > .col-sm.block {
+  background-color: gray;
+}

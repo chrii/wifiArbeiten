@@ -1,0 +1,43 @@
+/******* Verbinden zu mysql über die commandline *****/
+
+mysql -u username -p
+danach Passwort eingeben
+
+WAMP: Prozessleiste->WAMP linke Maustaste->MySQL->MySQLConsole
+
+/**** Datenbanken auflisten ****/
+SHOW DATABASES;
+
+/**** Datenbanken erstellen ****/
+CREATE DATABASE name;
+
+/**** Datenbank verwenden ****/
+USE name_der_db;
+
+/**** Tabellen anzeigen ****/
+SHOW TABLES;
+
+/**** Tabellen erstellen ****/
+CREATE TABLE name (spaltenname DATENTYP, spaltenname DATENTYP, ....)
+
+/**** Daten einfügen ****/
+Beim Insert werden zuerst die Spaltennamen angegeben,
+nach VALUES werden in der Reihenfolge der angegebenen Spalten Werte zugewiesen
+
+INSERT INTO tabelle (spalte1, spalte2, ...)
+VALUES (wert_spalte1, wert_spalte2, ...)
+
+/**** Datensätze auslesen ****/
+SELECT spalte1, spalte2, spalte3 ... FROM tabelle;
+
+* selektiert alle Spalten:
+SELECT * FROM tabelle;
+
+Einschränken mit WHERE
+SELECT * FROM tabelle WHERE spalte = wert;
+
+/**** Datensatz aktualisieren ****/
+UPDATE table SET spalte1=wert1, spalte2=wert2, ... WHERE Bedingung;
+
+/**** Datensatz aktualisieren ****/
+DELETE FROM tabelle WHERE Bedingung;

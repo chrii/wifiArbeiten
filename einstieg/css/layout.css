@@ -1,0 +1,23 @@
+body {
+    background-color: #F0F0F0;
+    color: #333;
+    line-height: 1.5;
+}
+
+.container {
+    width: 90%;
+    max-width: 1020px;
+    margin: 2em auto 0 auto;
+    min-height: 20em;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+
+.site-header {
+    padding: 0.75em 2em;
+    text-align: center;
+    background-color: rgb(187, 194, 207);
+}
+
+main {
+    padding: 2em 1em;
+}

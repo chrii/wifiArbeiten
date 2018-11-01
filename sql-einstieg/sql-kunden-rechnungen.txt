@@ -1,0 +1,9 @@
+/*
+    Selektiere produkt, betrag aus Rechnungen, vorname, nachname aus kunden.
+    Ermittle die Datensätze, bei denen die rechnungen.kunden_id mit kunden.kunden_id übereinstimmt.
+
+    Zwei Tabellen werden über die kunden_id/kunden.id verknüpft. Es besteht eine
+    Relation.
+*/
+
+SELECT rechnungen.produkt, rechnungen.betrag, kunden.vorname, kunden.nachname FROM rechnungen, kunden WHERE rechnungen.kunden_id = kunden.id;

@@ -1,0 +1,33 @@
+version: '3.7'
+services:
+  apache:
+    image: httpd
+    restart: always
+    volumes:
+      - ../../static:/usr/local/apache2/htdocs/
+    ports:
+      - "8080:80"
+  php:
+    image: php:apache
+    restart: always
+    volumes:
+      - ../../php:/var/www/html
+      - ../../static:/var/www/html/static
+    ports:
+      - "8090:80"
+  js:
+    image: node
+    # restart: always
+    volumes:
+      - ../../js:/js
+    ports:
+      - "9090:80"
+  mariadb:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: tetris
+    volumes:
+      - ../mariadb/data:/var/lib/mysl
+    ports:
+      - "3307:3306"
