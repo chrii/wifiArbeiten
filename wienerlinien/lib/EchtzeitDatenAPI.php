@@ -3,7 +3,7 @@ header( 'Access-Control-Allow-Origin: *' );
 header( 'Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept' );
 header( 'Content-Type:application/json' );
 // Senderkey für Entwickler
-$senderKey = 'KnyRurw9H7RxH73t';
+$senderKey = 'Platzhalter';
 
 // Test RBL für Reumannplatz => 4101
 $rblReumann = 4101;
