@@ -1,0 +1,18 @@
+/* USED COLOR FROM MATERIAL indigo darken-2 OR #303f9f */
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box; 
+}
+#map {
+    width: auto;
+    height: 600px;
+    border: 1px solid black;
+}
+main, div {
+    padding-top:5px;
+}

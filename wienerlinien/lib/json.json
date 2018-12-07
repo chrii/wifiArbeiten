@@ -1,0 +1,129 @@
+{
+	"data": {
+		"monitors": [{
+			"locationStop": {
+				"type": "Feature",
+				"geometry": {
+					"type": "Point",
+					"coordinates": [16.3690202588504, 48.2023264789235]
+				},
+				"properties": {
+					"name": "60200975",
+					"title": "Oper/Karlsplatz U",
+					"municipality": "Wien",
+					"municipalityId": 90001,
+					"type": "stop",
+					"coordName": "WGS84",
+					"gate": "E",
+					"attributes": {
+						"rbl": 1678
+					}
+				}
+			},
+			"lines": [{
+				"name": "N62",
+				"towards": "Speising, Hermesstraße",
+				"direction": "H",
+				"richtungsId": "1",
+				"barrierFree": true,
+				"realtimeSupported": true,
+				"trafficjam": false,
+				"departures": {
+					"departure": [{
+						"departureTime": {
+							"timePlanned": "2018-12-07T03:32:00.000+0100",
+							"timeReal": "2018-12-07T03:32:00.000+0100",
+							"countdown": 20
+						}
+					}, {
+						"departureTime": {
+							"timePlanned": "2018-12-07T04:02:00.000+0100",
+							"countdown": 50
+						},
+						"vehicle": {
+							"name": "N62",
+							"towards": "Speising, Hermesstraße",
+							"direction": "H",
+							"richtungsId": "1",
+							"barrierFree": false,
+							"realtimeSupported": true,
+							"trafficjam": false,
+							"type": "ptBusNight",
+							"attributes": {},
+							"linienId": 562
+						}
+					}]
+				},
+				"type": "ptBusNight",
+				"lineId": 562
+			}]
+		}, {
+			"locationStop": {
+				"type": "Feature",
+				"geometry": {
+					"type": "Point",
+					"coordinates": [16.3690202588504, 48.2023264789235]
+				},
+				"properties": {
+					"name": "60200975",
+					"title": "Oper/Karlsplatz U",
+					"municipality": "Wien",
+					"municipalityId": 90001,
+					"type": "stop",
+					"coordName": "WGS84",
+					"gate": "E",
+					"attributes": {
+						"rbl": 1678
+					}
+				}
+			},
+			"lines": [{
+				"name": "N46",
+				"towards": "Joachimsthalerplatz",
+				"direction": "H",
+				"richtungsId": "1",
+				"barrierFree": true,
+				"realtimeSupported": true,
+				"trafficjam": false,
+				"departures": {
+					"departure": [{
+						"departureTime": {
+							"timePlanned": "2018-12-07T03:17:00.000+0100",
+							"timeReal": "2018-12-07T03:17:00.000+0100",
+							"countdown": 5
+						}
+					}, {
+						"departureTime": {
+							"timePlanned": "2018-12-07T03:47:00.000+0100",
+							"timeReal": "2018-12-07T03:47:00.000+0100",
+							"countdown": 35
+						}
+					}, {
+						"departureTime": {
+							"timePlanned": "2018-12-07T04:17:00.000+0100",
+							"countdown": 65
+						},
+						"vehicle": {
+							"name": "N46",
+							"towards": "Joachimsthalerplatz",
+							"direction": "H",
+							"richtungsId": "1",
+							"barrierFree": false,
+							"realtimeSupported": true,
+							"trafficjam": false,
+							"type": "ptBusNight",
+							"attributes": {}
+						}
+					}]
+				},
+				"type": "ptBusNight",
+				"lineId": 546
+			}]
+		}]
+	},
+	"message": {
+		"value": "OK",
+		"messageCode": 1,
+		"serverTime": "2018-12-07T03:11:43.270+0100"
+	}
+}
