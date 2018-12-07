@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+	<title>Javascript Basics</title>
+	<meta charset="utf-8">
+	<script>
+
+/* 1. Unterschiede PHP/JS*/
+/*
+PHP: OBJ->ATTR
+JS: OBJ.ATTR
+
+JS: Ende der Zeile wird versurcht das Statement automatisch zu beenden
+
+PHP: Variablenname beginnt mit $
+JS: kann muss aber nicht mit $ beginnen
+
+PHP: Verketten von Strings mit . "abc" . $x
+JS: Verkettungsoperator +
+
+JS: var obj = {};
+*/
+
+
+/* 2. Objekte im JS */
+window.onload = function() {
+var o = {
+	a1:'Name',
+	a2:1000,
+	m:function() {
+	}
+};
+
+var htmlElement = document.getElementById( 'feld' ); // object
+var inhaltFeld = document.getElementById( 'feld' ).value ; // string
+
+inhaltFeld = 'neuer Inhalt'; // nicht im HTML
+htmlElement.value = 'neuer Inhalt';  // im HTML
+document.getElementById( 'feld' ).value = 'neuer Inhalt'; // im HTML
+
+document.getElementById( 'ausgabe' ).innerHTML += '<p>Hallo Welt</p>';
+
+
+var s = 'a';
+s=s+'b';
+s+='b';
+
+var absatz = document.createElement( 'p' );
+absatz.innerHTML = 'Hallo Welt';
+absatz.id = 'meinAbsatz';
+
+document.getElementById( 'ausgabe' ).appendChild( absatz );
+
+absatz.style.color = 'red';
+
+var alterP = document.getElementById( 'abs1' );
+//alterP.style.color = 'blue';
+alterP.className = 'yellow';
+absatz.className = 'yellow';
+
+}
+	</script>
+	<style>
+body { font:30px Arial; }
+p { background:#000; }
+.yellow { color:yellow !important; }
+	</style>
+</head>
+<body>
+	<input type="text" id="feld">
+	<div id="ausgabe">
+		<p id="abs1">1. Absatz</p>
+	</div>
+
+</body>
+</html>

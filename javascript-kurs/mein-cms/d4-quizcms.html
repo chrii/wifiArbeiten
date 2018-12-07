@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+<head>
+	<title>Quiz Fragen Verwaltung</title>
+	<meta charset="utf-8">
+	<script src="../jquery-3.3.1.min.js"></script>
+	<script>
+
+var loescheFrage = function( i ) {
+	$.ajax({
+		url:'http://localhost/javascript-kurs/php/quiz.php',
+		method:'POST',
+		data:{requestart:'loeschen',index:i},
+		success:function(response) {
+
+			ladeFragen();
+			alert( 'Frage gelöscht' );
+		}
+	});
+}
+
+var ladeFragen = function() {
+	$.ajax({
+		url:'http://localhost/javascript-kurs/php/quiz.php',
+		method:'POST',
+		data:{requestart:'ausgabe'},
+		success:function(response){
+			//console.log( response );
+			$( '#ausgabe' ).empty();
+			var alleFragen = response.fragen; //ARRAY
+			var tabelle = $( '<table border="1">').appendTo( '#ausgabe');
+			for ( let i=0; i<alleFragen.length; i++ ) {
+				var eineFrage = alleFragen[i];
+				var zeile = $( '<tr>' ).appendTo( tabelle );
+				var td1 = $( '<td>').appendTo(zeile);
+				var td2 = $( '<td>').appendTo(zeile);
+				td1.html( eineFrage.frage );
+				td1.on('click', function() {
+					$( 'ol' ).slideUp();
+					$( 'ol', this).slideDown();
+				})
+				$( '<b>' ).html( eineFrage.schwierigkeit ).appendTo( td1 );
+				var liste = $( '<ol>' ).appendTo( td1 );
+				for ( let j=0; j<eineFrage.antworten.length; j++ ){
+					$( '<li>' )
+						.html( eineFrage.antworten[j] )
+						.addClass( eineFrage.richtig == j ? 'richtig' : '')
+						.appendTo( liste );
+				}
+				$( '<button>' )
+					.html( 'Frage löschen' )
+					.on( 'click', function() { loescheFrage(i); } )
+					.appendTo( td2 );
+
+			}
+			// was muss mit den Fragen passieren?
+			//vielleicht eine Tabelle erzeugen?
+			// Daten stehen in response
+		}
+	});
+}
+
+var userHatGeklickt = false;
+$( document ).ready( function() {
+	ladeFragen();
+	$( 'form' ).get(0).reset();
+	//document.getElementById( 'new' ).onclick = function( event ) {}
+	$( '#new' ).on('click', function(event) {
+		event.preventDefault();
+
+		if ( userHatGeklickt == true ) {
+			return; // tu nichts mehr, abbrechen
+		}
+
+		var requestData = {
+			requestart:"speichern",
+		  frage:$('#frage').val(),
+		  antwort1:$('#antwort1').val(),
+			antwort2:$('#antwort2').val(),
+			antwort3:$('#antwort3').val(),
+			antwort4:$('#antwort4').val(),
+		  richtig:$('input[name=richtig]:checked').val(),
+		  schwierigkeit:$('#schwierigkeit').val()
+		};
+		// check
+		for ( let i in requestData ) { // schleife durch objekt
+
+			if ( requestData[i] == '' ) {
+				$( '#'+i ).addClass( 'error' );
+			} else {
+				$( '#'+i ).removeClass( 'error' );
+			}
+		}
+
+		if ( $( '.error').length == 0 ) {
+			// Formularelemente mit JS disablen
+			$( '#new' ).prop( 'disabled', true );
+			$( '<img>' ).attr( 'src', 'ajax-loader.gif').appendTo( '#new' );
+			userHatGeklickt = true;
+			$( '#overlay' ).show();
+
+			$.ajax({
+				url:'http://localhost/javascript-kurs/php/quiz.php',
+				method:'POST',
+				data:requestData,
+				success:function(response){
+					userHatGeklickt = false;
+					$( '#new' ).prop( 'disabled', false );
+					$( '#new img' ).remove();
+					$( '#overlay' ).hide();
+					if ( response.gespeichert ) {
+						alert( 'Frage gespeichert!');
+						$( 'form' ).get(0).reset(); // Zurücksetzen
+						ladeFragen();
+					} else {
+						alert( 'Fehler, Frage konnte nicht gespeichert werden.');
+					}
+				},
+				error:function(){
+					userHatGeklickt = false;
+					$( '#new' ).prop( 'disabled', false );
+					$( '#new img' ).remove();
+					$( '#overlay' ).hide();
+					alert( 'Server nicht erreichbar.');
+				}
+			});
+
+		} //if
+	});
+
+
+});
+
+
+	</script>
+	<style>
+	body, input, select, button { font:30px Arial;}
+	.error { background:red; color:#fff; }
+	ol { list-style-type: upper-latin; display:none; }
+	#overlay { position:fixed; top:0; left:0; right:0;
+		bottom:0; z-index:2147483647;
+		background:rgba(0,0,0,0.7); display:none; }
+	.richtig { color:green; }
+	b { margin-left:10px; border:1px solid #000; border-radius:50%; display:inline-block; padding:2px 10px;}
+	</style>
+</head>
+<body>
+	<form method="post" action="?" >
+		<h1>Neue Frage</h1>
+		Frage:<input type="text" id="frage"><br>
+		A:<input type="radio" name="richtig" value="0" checked><input type="text" id="antwort1">
+		<br>
+		B:<input type="radio" name="richtig" value="1"><input type="text" id="antwort2">
+		<br>
+		C:<input type="radio" name="richtig" value="2"><input type="text" id="antwort3">
+		<br>
+		D:<input type="radio" name="richtig" value="3"><input type="text" id="antwort4">
+		<br>
+		Schwierigkeit: <select id="schwierigkeit">
+			<option value="">bitte wählen</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10">10</option></select>
+			<br><button id="new">Speichern</button></form><hr>
+
+			<div id="ausgabe">
+				<!-- TABELLE mit JSON-Daten generieren -->
+			</div>
+
+		<div id="overlay"></div>
+
+</body>
+</html>

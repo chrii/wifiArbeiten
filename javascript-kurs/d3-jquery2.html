@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+	<title>jQuery</title>
+	<meta charset="utf-8">
+	<script src="jquery-3.3.1.min.js"></script>
+	<script>
+
+/*var fkt = function( el ) {
+	return {
+		m:function( cb ){
+			cb();
+		}
+	}
+}
+fkt( document ).m( function() { })*/
+
+$( document ).ready( function() {
+
+
+	console.log( $( '#d1' ) ); // jQueryObjekt
+	console.log( document.getElementById( 'd1' ) );// HTMLNodeElement
+
+	var jqueryObj = $( '#d1' );
+	var htmlObj = document.getElementById( 'd1' );
+
+	htmlObj = jqueryObj[0]; // jqueryObj.get(0)
+
+	var jqueryObj = $( 'div' );
+	htmlObjDiv1 = jqueryObj[0];
+	htmlObjDiv2 = jqueryObj[1];
+
+	jqueryObj = $( htmlObj ); // wandelt HTMLNode in jQuery um
+
+
+	// jQuery-Methoden
+	//$( '#d1' ).html('TEXT').css({color:'red'}); // transparente
+	//$( '#d1' ).parent().css({color:'blue'}); // destruktive, jObj aber anderes
+	//$( '#d1' ).width(); // terminierend, return ist kein jObj, sondern Zahl
+
+	$( 'div' )
+		.html( 'alle gleicher Text und rot' )
+		.css({color:'red'})
+		.eq(1)
+		.html('neuer Text')
+		.css({color:'green'})
+		.parent()
+		.find('div')
+		.css({fontSize:25});
+
+	// DOM Traversing, Manipulation
+/*
+	.parent() => Eltern Element
+	.find( sel ) => suche innerhalb der Objekte
+  .next() => nächstes Element
+	.prev() => voriges Element
+	.children( sel ) => wie find aber nur Kinder
+	.siblings() => alle Geschwister
+
+
+	.appendTo() => fügt neues Element in bestehendes ein (am Ende)
+	.prependTo() => wie appendTo aber am Anfang
+
+	.append() => in bestehendes Objekt neues einfügen
+	.prepend() =>
+
+*/
+	console.log( $( 'div' ) );
+	console.log( $( 'div' ).parent() );
+
+	$( 'section' ).on( 'click', function() {
+		console.log( $(this).find('div') );
+	})
+
+	$( '<a href="#">' ).html('Klick mich').prependTo( 'body' );
+	$( 'body' ).append( $('<p>').html('Hallo') );
+
+});
+	</script>
+	<style>
+	</style>
+</head>
+<body>
+	<section>
+		<div id="d1">Text1</div>
+	</section>
+	<div id="d2">Text2</div>
+</body>
+</html>

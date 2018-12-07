@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+	<title>Javascript Basics</title>
+	<meta charset="utf-8">
+		<script src="jquery-3.3.1.min.js"></script>
+	<script>
+// Objekte in Javascript
+var obj = {
+	vorname: 'Max',
+	nachname: 'Mustermann',
+	ganzerName: function() {
+		return this.vorname + ' ' + this.nachname;
+	}
+}
+
+// JSON -> nur Daten!!!! keine Methoden!
+var jsonString = '{"vorname":"Max","nachname":"Mustermann","ganzerName":"Max Mustermann"}';
+var obj2 = JSON.parse( jsonString );
+
+$( document ).ready(function() {
+	/*$.ajax({
+		success:function() {
+
+		}
+	})*/
+	var jsonString = '{"zahlen":[{"value":3,"typ":"integer"},{"value":5.3,"typ":"float"}]}';
+	var obj = JSON.parse( jsonString );
+	var liste = $( '<ul>' ).appendTo( 'body' );
+	for ( let i=0; i<obj.zahlen.length; i++ ) {
+	//for (let i in obj.zahlen )	{
+		var zahl =  obj.zahlen[i];
+		$('<li>').html( zahl.value ).appendTo( liste );
+	}
+
+
+	/*var zeile =*/ $( '<tr>').appendTo('#x');
+	$( '<td>' ).html('X').appendTo( 'tr' );
+	$( '<td>' ).html('Y').appendTo( 'tr' );
+
+});
+
+	</script>
+	<style>
+	</style>
+</head>
+<body>
+	<table id="x"></table>
+</body>
+</html>

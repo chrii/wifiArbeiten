@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+	<title>Javascript Basics</title>
+	<meta charset="utf-8">
+	<script src="jquery-3.3.1.min.js"></script>
+	<script>
+$( document ).ready( function() {
+	$( '#progress' ).on('click', function() {
+		$( '#progress div' ).animate({width:0},5000, function() {
+			alert( 'ende' );
+		});
+	});
+	$( 'button' ).on('click', function() {
+			$( '#progress div' ).stop();
+	});
+});
+	</script>
+	<style>
+	#progress { height:1em; width:200px; border:1px solid #000;}
+	#progress div { border-right:1px solid #000; background:red; height:1em;  }
+	</style>
+</head>
+<body>
+
+	<div id="progress"><div></div></div>
+	<button>Stop!!!</button>
+</body>
+</html>

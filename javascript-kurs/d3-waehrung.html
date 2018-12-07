@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+	<title>Javascript Basics</title>
+	<meta charset="utf-8">
+	<script src="jquery-3.3.1.min.js"></script>
+	<script>
+// https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml
+$( document ).ready( function() {
+	$.ajax({
+		url:'http://wifi.1av.at/508/ecb.php',
+		method:'GET',
+		success:function( antwort ) { // XML-Antwort
+		  var usd = $( 'Cube Cube Cube', antwort ).eq(0).attr('rate');
+			$( '#kurs' ).html( usd );
+
+			$( 'button' ).on( 'click', function( e ) {
+				e.preventDefault();
+				//$( '#eingabe').val()
+				var eingabe = document.getElementById( 'eingabe' ).value;
+				$( '#kurs' ).html( Math.round( usd * eingabe * 100 ) / 100 );
+				$( '#wert1' ).html( eingabe );
+				$( '#eingabe').val('').focus(); // macht feld leer und setzt cursor rein
+			} )
+
+		}
+	})
+
+
+
+
+});
+
+
+	</script>
+	<style>
+html, body, input, button, select { font-size: 30px; }
+body {padding-top:100px; text-align:center; }
+	</style>
+</head>
+<body>
+	<p>EUR<span id="wert1">1</span> = USD<span id="kurs"></span></p>
+	<form action="?">
+		<input type="text" id="eingabe" autocomplete="off"><button>umrechnen</button>
+	</form>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+	<title>Javascript Basics</title>
+	<meta charset="utf-8">
+	<script src="jquery-3.3.1.min.js"></script>
+	<script>
+$( document ).ready( function() {
+
+	$( 'button' ).on( 'click', function() {
+
+		//jQuery
+		$.ajax({
+			url:'http://wifi.1av.at/508/test.php',
+			method:'GET',
+			success:function( response ) {
+					$( '#ausgabe' ).html( response );
+			}
+		})
+
+	});
+
+})
+	</script>
+	<style>
+	</style>
+</head>
+<body>
+	<div id="ausgabe"></div>
+	<button>Lade Inhalt vom Server</button>
+</body>
+</html>

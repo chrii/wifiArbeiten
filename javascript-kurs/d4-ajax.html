@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+	<title>Javascript Basics</title>
+	<meta charset="utf-8">
+	<script src="jquery-3.3.1.min.js"></script>
+	<script>
+$( document ).ready( function() {
+
+	$( '#btn' ).on( 'click', function( event ) {
+		event.preventDefault(); // FORM nicht schicken
+		var eingabe = $( '#eingabe' ).val();
+		$.ajax({
+			url:'http://localhost/js/server/ajax.php',
+			method:'POST',
+			data:{y:eingabe},
+			success:function( response ) {
+				alert( response );
+			}
+		})
+
+	});
+
+});
+	</script>
+	<style>
+	body, input, button { font:30px Arial;}
+	</style>
+</head>
+<body>
+	<!-- <form method="post" action="http://localhost/js/server/ajax.php"> -->
+		Eingabe: <input type="text" name="eingabe" id="eingabe"><br>
+		<button id="btn">Starte Request</button>
+	<!-- </form> -->
+	<div id="ausgabe"></div>
+</body>
+</html>

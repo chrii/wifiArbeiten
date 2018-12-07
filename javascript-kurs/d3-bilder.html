@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+	<title>Bilder</title>
+	<meta charset="utf-8">
+	<script src="jquery-3.3.1.min.js"></script>
+	<script>
+var bilder = [
+	'das-paradies-fuer-wintersportler.jpg',
+	'endlos-weite-schwuenge-ueber-perfekt-praeparierte-pisten-ziehen.jpg',
+	'erlebnishotel-fendels-familienhit.jpg',
+	'fruehlings-special-top-of-tyrol.jpg'
+];
+var aktuell = 0;
+
+// preloader
+/*for ( var i in bilder ) {
+	var img = new Image();
+	img.src = 'bilder/'+bilder[i];
+	//$( '<img>' ).attr( 'src', 'bilder/'+bilder[i] );
+}*/
+
+var aendereBild = function() {
+	$( '#bild img' )
+		.attr( 'src', 'bilder/'+bilder[aktuell] );
+	$( '.aktiv' ).removeClass( 'aktiv' );
+	$( '.bildbutton' ).eq(aktuell).addClass('aktiv');
+}
+
+$( document ).ready( function() {
+
+	for ( let i = bilder.length-1; i>=0; i-- ) {
+		//$( '<span>' ).appendTo( '#btn_vor' );
+		$( '#btn_vor' ).after(
+				$( '<span>' )
+					.html(i+1)
+					.addClass('bildbutton')
+					.on( 'click', function() {
+						aktuell = i;
+						aendereBild();
+					})
+		);
+	}
+
+
+		$( '<img>' ).appendTo( '#bild' )
+		aendereBild();
+
+		$('#btn_nach').on( 'click', function() {
+				aktuell++;
+				if ( aktuell > bilder.length - 1 ) {
+					aktuell = 0;
+				}
+				aendereBild();
+		});
+		$('#btn_vor').on( 'click', function() {
+				aktuell--;
+				if ( aktuell < 0 ) {
+					aktuell = bilder.length - 1;
+				}
+				aendereBild();
+		});
+});
+
+
+	</script>
+	<style>
+span {
+	display:inline-block;
+	border:1px solid #000;
+	width:20px;
+	height:20px;
+	margin:5px;
+	cursor:pointer;
+	border-radius:50%;
+	text-align:center;
+}
+.bildbutton {
+	background:#ccc;
+}
+.aktiv {
+	background:#f00;
+	color:#fff;
+}
+
+/*
+#bild { position:relative; }
+button { position:absolute; top:50%; }
+#btn_vor { left:0; }
+#btn_nach { right:0; }
+*/
+
+
+	</style>
+</head>
+<body>
+	<div id="bild">
+	<h1>Bilder</h1>
+	<!-- <img> -->
+
+</div>
+<button id="btn_vor">voriges</button>
+<button id="btn_nach">nächstes</button>
+</body>
+</html>

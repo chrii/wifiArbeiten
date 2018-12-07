@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+	<title>Lotto 6 aus 45</title>
+	<meta charset="utf-8">
+	<script>
+
+window.onload = function() {
+
+	var ausgabe = document.getElementById( 'ausgabe' );
+
+	var table, tr, td, i;
+	var numberCols = 6, numberRows = 8, maxNumber = 45;
+	var anzahlSelected = 0;
+
+	// Tabelle erzeugen
+	table = document.createElement( 'table' );
+	table.border = 1;
+ 	ausgabe.appendChild( table );
+
+	//so wäre es mit jQuery ;)
+	//$( '<table>' ).attr({border:1}).appendTo( '#ausgabe' )
+
+	for ( i=1; i<=maxNumber; i++ ) {
+		if ( i%numberCols == 1 ) {
+			tr = document.createElement( 'tr' );
+			table.appendChild( tr );
+		}
+		td = document.createElement( 'td' );
+		td.innerHTML = i;
+		td.onclick = function() {
+
+			if ( this.className != 'selected' && anzahlSelected == 6 ) {
+				return;
+			}
+
+			this.className = this.className == 'selected' ? '' : 'selected';
+			/*if ( this.className == 'selected' ) {
+				this.className = '';
+			} else {
+				this.className = 'selected';
+			}*/
+			if ( this.className == 'selected' ) {
+				anzahlSelected++;
+			} else {
+				anzahlSelected--;
+			}
+
+		} // onclick
+		tr.appendChild( td );
+	}
+
+
+
+
+} // onload
+	</script>
+	<style>
+	td { vertical-align:middle; text-align:center; width:50px; height:50px;
+		cursor:pointer;
+		user-select: none;
+		-moz-user-select:none;
+		-ms-user-select:none;
+		-webkit-user-select:none;
+	}
+	.selected { background:#000; color:#fff;  }
+	</style>
+</head>
+<body>
+	<h1>6 aus 45</h1>
+	<div id="ausgabe"></div>
+</body>
+</html>

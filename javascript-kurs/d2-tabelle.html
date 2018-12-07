@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+	<title>Tabelle</title>
+	<meta charset="utf-8">
+	<script>
+
+var quersumme = function( zahl ) {
+	var q = 0, i;
+	zahl += '';
+	for (i in zahl) {
+		q+=zahl[i]*1;
+	}
+	return q;
+}
+
+window.onload = function() {
+
+	var ausgabe = document.getElementById( 'ausgabe' );
+
+	var table, tr, td, i;
+	var numberCols = 4, numberRows = 5;
+
+	// Tabelle erzeugen
+	table = document.createElement( 'table' );
+	table.border = 1;
+ 	ausgabe.appendChild( table );
+
+	for ( i=1; i<=numberCols*numberRows; i++ ) {
+		if ( i%numberCols == 1 ) {
+			tr = document.createElement( 'tr' );
+			table.appendChild( tr );
+		}
+		td = document.createElement( 'td' );
+		td.innerHTML = i + '<br>R' + (i%numberCols);
+		/*if ( quersumme(i) == 9 ) {
+			td.style.backgroundColor = 'red';
+		}*/
+		tr.appendChild( td );
+	}
+	/*
+	Lösung mit zwei Schleifen
+	var c = 0;
+	for ( i=1; i<=numberRows; i++ ) {
+		tr = document.createElement( 'tr' );
+		table.appendChild( tr );
+		for ( let j = 1; j<= numberCols; j++ ) {
+			c++;
+			td = document.createElement( 'td' );
+			td.innerHTML =c;
+			tr.appendChild( td );
+		}
+	}*/
+
+
+
+
+
+} // onload
+	</script>
+	<style>
+	td { vertical-align:middle; text-align:center; width:50px; height:50px; }
+	</style>
+</head>
+<body>
+	<h1>Tabelle mit JS</h1>
+	<div id="ausgabe"></div>
+<!-- <h1>Tabelle im HTML</h1>
+<table border="1">
+	<tr>
+		<td>Zelle 1</td>
+		<td>Zelle 2</td>
+	</tr>
+	<tr>
+		<td>noch eine Zeile</td>
+		<td>...</td>
+	</tr>
+</table> -->
+
+
+
+</body>
+</html>

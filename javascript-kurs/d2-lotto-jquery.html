@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+	<title>Lotto 6 aus 45</title>
+	<meta charset="utf-8">
+	<script src="jquery-3.3.1.min.js"></script>
+	<script>
+//var counter = 0;
+$( document ).ready( function () {
+	$( '<table>' ).attr( 'border', 1 ).appendTo( '#ausgabe' );
+	for ( let i=1; i<=45; i++ ) {
+		if ( i%6 == 1 ) {
+			$( '<tr>' ).appendTo( '#ausgabe table' );
+		}
+		$( '<td>' )
+			.html( i )
+			.on( 'click', function() {
+
+					$(this).toggleClass( 'selected' );
+					if ( $('.selected').length > 6 ) {
+						$(this).removeClass( 'selected' );
+					}
+
+					if (  $('.selected').length == 6 ) {
+						$( 'button' ).fadeIn(); //.show();
+					}  else {
+							$( 'button' ).fadeOut(); //.hide();
+					}
+
+					/*if ( $(this).hasClass( 'selected' ) ) {
+						$(this).removeClass( 'selected' );
+						counter--;
+					} else if ( counter < 6 ){
+						$(this).addClass( 'selected' );
+						counter++
+					}*/
+			}).appendTo( '#ausgabe tr:last-child' );
+	} //for
+
+
+	$( 'button' ).on( 'click', function() {
+		$( '.gezogen' ).removeClass( 'gezogen' );
+		for ( let i = 1; i <= 6; i++ ) {
+			var zufall = Math.floor( Math.random() * 45 ) + 1;
+			if ( 	$( 'td' ).eq( zufall-1 ).hasClass( 'gezogen') ) {
+				i--;
+			} else {
+				$( 'td' ).eq( zufall-1 ).addClass( 'gezogen' );
+			}
+		}
+
+		$( '<p>' )
+			.appendTo( 'body')
+			.html( 'Treffer: ' + $( '.gezogen.selected' ).length );
+
+	});
+
+}); // ready
+
+</script>
+
+
+
+
+
+	<style>
+
+	.gezogen {
+		border:1px solid red;
+		color:red;
+	}
+
+	td { vertical-align:middle; text-align:center; width:50px; height:50px;
+		cursor:pointer;
+		user-select: none;
+		-moz-user-select:none;
+		-ms-user-select:none;
+		-webkit-user-select:none;
+		/*transition:all 1s;*/
+		position:relative;
+	}
+/*	table {
+		border-spacing: 10px;
+	}*/
+.selected { background:#000; color:#fff;   }
+/*	td::before, td::after {
+		content:'';
+		display:block;
+		width:48px; height:48px;
+		position:absolute;
+		top:0;
+		left:0;
+		border-radius:50%;
+		background:radial-gradient(#ccc, #000);
+		opacity:0;
+		transform:scale(0);
+		transition:all 1s;
+	}
+	td::after {
+		background:transparent;
+		border:2px solid #000;
+		opacity:1;
+		transform:scale(1);
+	}
+	td::before {
+		z-index:2;
+		top:2px;
+		left:2px;
+	}
+	.selected::before {
+		opacity:0.6;
+		transform:scale(1);
+
+	}
+	table,tr, td {border:none;}*/
+	button { display:none; }
+	</style>
+</head>
+<body>
+	<h1>6 aus 45</h1>
+	<div id="ausgabe"></div>
+	<button>Starte Ziehung</button>
+</body>
+</html>

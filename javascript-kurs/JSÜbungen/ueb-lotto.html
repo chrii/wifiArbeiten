@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+	<title>Lotto 6 aus 45</title>
+	<meta charset="utf-8">
+	<script src="jquery-3.3.1.min.js"></script>
+<!--
+	Aufgabe:
+	Es sollen mehrere Tipps generiert werden können.
+
+	User kann mittels <select> zwischen 1 und 10 Tipps
+	(=Tabelle) generieren lassen.
+	Hinweis: Zusätzlich zum Erzeugen der Tabellen muss
+	bestehendes Script so erweitert werden,	dass es mit
+	mehreren Tabellen richtig funktioniert!
+
+	Erst wenn alle Tipps ausgefüllt sind (es wurden
+	6 Zahlen pro Tipp gewählt ), kann man die Ziehung
+	starten.
+
+	In der Ausgabe erscheint, wieviele Zahlen pro Tipp
+	"erraten" wurden.
+
+	Zusatzaufgabe (freiwillig):
+	Quicktipp-Funktion, d.h. User muss nicht selbst
+	Zahlen auswählen, sondern per Zufall werden pro Tipp
+	6 Zahlen vorausgewählt.
+-->
+	<script>
+var erzeugeTipp = function() {
+	$( '<table>' ).attr( 'border', 1 ).appendTo( '#ausgabe' );
+	for ( let i=1; i<=45; i++ ) {
+		if ( i%6 == 1 ) {
+			$( '<tr>' ).appendTo( 'table' );
+		}
+		$( '<td>' )
+			.html( i )
+			.on( 'click', function() {
+					$(this).toggleClass( 'selected' );
+					if ( $('.selected').length > 6 ) {
+						$(this).removeClass( 'selected' );
+					}
+
+					// Button ein/ausblenden
+					if (  $('.selected').length == 6 ) {
+						$( 'button' ).fadeIn();
+					}  else {
+							$( 'button' ).fadeOut();
+					}
+
+			}).appendTo( 'tr:last-child' );
+	} //for
+}
+
+$( document ).ready( function () {
+	erzeugeTipp();
+
+	$( 'button' ).on( 'click', function() {
+		$( '.gezogen' ).removeClass( 'gezogen' );
+		for ( let i = 1; i <= 6; i++ ) {
+			var zufall = Math.floor( Math.random() * 45 ) + 1;
+			if ( 	$( 'td' ).eq( zufall-1 ).hasClass( 'gezogen') ) {
+				i--;
+			} else {
+				$( 'td' ).eq( zufall-1 ).addClass( 'gezogen' );
+			}
+		}
+
+		$( '<p>' )
+			.appendTo( 'body')
+			.html( 'Treffer: ' + $( '.gezogen.selected' ).length );
+
+	});
+
+}); // ready
+
+</script>
+	<style>
+	.gezogen {
+		border:1px solid red;
+		color:red;
+	}
+	td { vertical-align:middle; text-align:center; width:50px; height:50px;
+		cursor:pointer;
+		user-select: none;
+		-moz-user-select:none;
+		-ms-user-select:none;
+		-webkit-user-select:none;
+	}
+	.selected { background:#000; color:#fff;   }
+	button { display:none; }
+	</style>
+</head>
+<body>
+	<h1>6 aus 45</h1>
+	<!-- Anzahl der Tipps: <select></select> -->
+	<div id="ausgabe"></div>
+	<button>Starte Ziehung</button>
+</body>
+</html>

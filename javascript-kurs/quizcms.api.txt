@@ -1,0 +1,65 @@
+Verwaltung von QuizFragen
+Schnittstellen-Beschreibung (API-Dokumentation)
+
+1. REQUEST: "Neue Frage speichern"
+URL: http://localhost/js/server/quiz.php
+METHODE: POST
+REQUEST-Daten
+  requestType="post"
+  frage=STRING
+  antwort1=STRING
+  antwort2=STRING
+  antwort3=STRING
+  antwort4=STRING
+  richtig=INT[1-4]
+  schwierigkeit=INT[1-10]
+
+RESPONSE-Format: application/json
+RESPONSE-Daten
+  {
+    gespeichert:true
+  }
+
+RESPONSE-Daten (Error)
+  {
+    gespeichert:false
+  }
+-----------------------------------------------------
+2. REQUEST: "Alle Fragen ausgeben"
+URL: http://localhost/js/server/quiz.php
+METHODE: POST
+REQUEST-Daten
+  requestType="get"
+
+RESPONSE-Format: application/json
+RESPONSE-Daten
+  {
+    fragen:ARRAY mit FrageObjekten
+  }
+
+FrageObjekte {
+  frage:STRING,
+  antworten:ARRAY mit 4 Strings,
+  richtig:INT[0-3],
+  schwierigkeit:INT[1-10]
+}
+
+3. REQUEST: "Frage löschen"
+URL: http://localhost/js/server/quiz.php
+METHODE: POST
+REQUEST-Daten
+  requestType="delete"
+  index=INT[0-]
+
+RESPONSE-Daten
+  {
+    geloescht:true
+  }
+
+RESPONSE-Daten (Error)
+  {
+    geloescht:false
+  }
+
+4. REQUEST: "Frage editieren/ändern"
+...

@@ -1,0 +1,116 @@
+/*
+Skeleton Colors:
+#1EAEDB
+#FFF
+#888
+#333
+#555
+#0FA0CE
+#bbb
+#33C3F0
+#D1D1D1
+#F1F1F1
+#E1E1E1
+
+*/
+
+
+body {
+    background-color: #68b3ff;
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #283e54;
+}
+nav ul li {
+    list-style-type: none;
+    float: left;
+    margin: 0px;
+}
+nav ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li a:hover {
+background-color: #0e7c82;
+}
+thead {
+    font-weight: bold;
+}
+tbody tr td {
+    cursor: pointer;
+    padding: 5px 15px;
+}
+tbody tr td ul {
+    display: none;
+}
+.container {
+    background-color: #e5f2ff;
+}
+.error {
+    border: 2px solid red;
+    border-radius: 5px;
+}
+#errorRadio {
+    color: red;
+}
+.richtig {
+    color: green;
+}
+
+
+/* Ladeanimation Anfang */
+
+.lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 51px;
+    height: 51px;
+    margin: 6px;
+    border: 6px solid #1EAEDB;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #1EAEDB transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+    }
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+    }
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.buttons-game {
+    text-align: center;
+}
+.buttons-game button {
+    height: auto;
+    width: 300px;
+}
+
+/* Ladeanimation Ende */

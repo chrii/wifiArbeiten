@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+	<title>Funktionen in JS</title>
+	<meta charset="utf-8">
+	<script>
+
+/* Funktionen - abgeschlossene Programmteile */
+/* Programmteile sich wiederholen, Programmteile nach Interaktion */
+/* werden nicht sofort ausgeführt, sondern erst mit Funktionsaufruf! */
+/* vordefinierten Funktionen in JS, im DOM/BOM */
+//navigator.javaEnabled()
+//window.alert()
+//window.document.getElementById()
+//GLOBAL ==> window
+var vGlob = 1, v = 3;
+function fName() {
+
+}
+
+//function() { } // anonyme Fkt
+var fName = function() {
+	var vLokal = 2, v = 4;
+	//console.log( v, window.v );
+
+}
+fName();
+//console.log( v );
+
+/* Parameter, Rückgabewerte */
+var summe = function( a, b ) { // a,b => lokale VAR
+	var s;
+	s = a + b;
+	return s;
+}
+
+var x;
+x = summe( 5, 6);
+
+var summe2 = function() { // arguments => ARRAY
+	// this => window
+	var s = 0, i;
+	for ( i = 0; i < arguments.length; i++) {
+		s+=arguments[i]*1; // *1 wandelt String in Number
+	}
+	return s;
+}
+x = summe2( 5, '6', 7);
+console.log( x );
+
+/* Methode */
+var o = {
+	m:function() {
+		/* this => Objekt, Kontext aus dem die Funktion aufgerufen wird */
+	}
+}
+o.m();
+
+/* Eventlistener */
+/*var button = document.getElementById( 'b1' );
+button.onclick = function() {
+	// this ==> button
+}*/
+
+/* rekursive Funktion */
+var rekFunkt = function( x ) {
+		var erg;
+		erg = x * x;
+		console.log( erg );
+		if ( erg < 10000 ) {
+			return rekFunkt( erg );
+		}
+		return erg/x;
+}
+
+var ergebnis = rekFunkt(2);
+console.log( 'Ergebnis', ergebnis );
+
+/* Callback Funktion */
+var fHaupt1 = function( x ) {
+	return x*x;
+}
+var q = fHaupt1( 5 );
+console.log( q );
+
+
+var fHaupt2 = function( x, cb ) { // Funktion wird übergeben
+		var q = x * x;
+		cb( q ); // am Ende wird callback-Funktion aufgerufen, ggf. mit Parameter
+}
+
+//fHaupt2( 5, console.log() ); // falsch!
+fHaupt2( 5, console.log ); // richtig!
+
+fHaupt2( 5, function( Q ) {
+	//alert( Q );
+});
+
+/* Closure Funktion */
+var multiply = function( a ) {
+	var c = a-1;
+	return function( b ) {
+		return a * b;
+	}
+}
+var multiply5 = multiply(5);
+var multiply3 = multiply(3);
+console.log( multiply5( 8 ), multiply3( 10 ) );
+
+// iife - immediately invoked function expression
+(function() {
+// STRICT MODUS in JS
+	"use strict";
+}());
+
+
+/* Konstruktor Funktion */
+var Fahrrad = function(p) {
+	this.farbe = 'rot';
+	this.preis = p || 1000;
+	this.fahren = function() {
+		console.log( this.farbe + 'es Fahrrad fährt und kostet ' + this.preis + '€' );
+	}
+}
+
+var mF = new Fahrrad(); // erzeugt ein Objekt
+var dF = new Fahrrad(500);
+mF.farbe = 'blau';
+mF.fahren();
+dF.fahren();
+
+
+	</script>
+	<style>
+	</style>
+</head>
+<body>
+	<button id="b1">Klick mich</button>
+</body>
+</html>

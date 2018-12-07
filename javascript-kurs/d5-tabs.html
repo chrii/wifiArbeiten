@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+	<title>Javascript Basics</title>
+	<meta charset="utf-8">
+	<script src="jquery-3.3.1.min.js"></script>
+	<script>
+var tabLoader = function( event) {
+	event.preventDefault();
+	$.ajax({
+		method:'GET',
+		url:$(this).attr('href'),
+		success:function( html ) {
+			$( '#content' ).empty().html( html );
+			// Eventlistener hinzufügen
+			$( '#content a' ).on('click', tabLoader );
+		}
+	})
+}
+$( document ).ready( function() {
+	$( 'nav a' ).on( 'click', tabLoader );
+});
+	</script>
+	<style>
+	#content { border:1px solid #000; width:400px; height:300px;}
+	</style>
+</head>
+<body>
+
+<nav>
+	<ul>
+		<li><a href="http://localhost/javascript-kurs/php/a.php">A</a></li>
+		<li><a href="http://localhost/javascript-kurs/php/b.php">B</a></li>
+		<li><a href="http://localhost/javascript-kurs/php/c.php">C</a></li>
+	</ul>
+</nav>
+<section id="content">
+</section>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="../jquery-3.3.1.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="layout/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="layout/css/skeleton.css">
+    <link rel="stylesheet" type="text/css" href="layout/css/loading-btn.css">
+    <link rel="stylesheet" type="text/css" href="layout/css/loading.css">
+    <!-- http:/localhost/javascript-kurs/mein-cms/php/quiz.php -->
+    <script>
+
+        var siteLoader = function(event) {
+            event.preventDefault();
+
+            $.ajax({
+                method:'GET',
+                url:$(this).attr('href'),
+                success:function(html) {
+                    
+                    $('main').empty().html(html);
+                    $('main a').on('click', siteLoader);
+                },
+                error:function(html){
+                    var err = $('main').empty();
+                    
+                    $('<h2>').appendTo(err).html('404 and the lost Document: <br>Indiana Jones wurde beaufrtragt um die verlorene Seite zu finden.')
+                    
+                }
+            });
+
+        }
+        $(document).ready(function() {
+            $('nav a').on('click', siteLoader);
+        })
+
+
+    </script>
+    <link rel="stylesheet" type="text/css" href="layout/css/layout.css">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="container">
+        <ul>
+            <li><a href="http://localhost/javascript-kurs/mein-cms/php/game.php">Quiz</a></li>
+            <li><a href="http://localhost/javascript-kurs/mein-cms/php/edit.php">Bearbeiten</a></li>
+        </ul>
+    </nav>
+    <header class="container">
+    <h2>Quiztime</h2>
+    </header>
+
+    <main class="container" id="main">
+        <script>   
+        </script>
+        <div class="container">
+            Herlich Willkommen!
+            Erstellen Sie ihre eigenen Fragen und lösen Sie diese im Anschluss in einem kleinen Quizspiel.
+        </div>
+
+    </main>
+</body>
+</html>

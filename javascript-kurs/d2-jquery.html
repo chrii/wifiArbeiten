@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+	<title>Javascript Basics</title>
+	<meta charset="utf-8">
+	<script src="jquery-3.3.1.min.js"></script>
+	<script>
+//window.onload = function() {}
+$( document ).ready( function() {
+
+		//document.getElementById( 'idabsatz1' )....
+
+		//document.getElementById( 'idabsatz1' ).innerHTML = 'neuer Text'; //JS
+	$( '#idabsatz1' ).html( 'neuer Text' ); // jQuery
+
+		//$( '.classabsatz' ).css( 'color', 'red' );
+
+
+		var abs = $( '.classabsatz' );
+		abs.css( 'color', 'red' );
+		abs.css( 'font-style', 'italic' );
+
+		$( '.classabsatz' )
+			.css( {
+				color:'red',
+				'font-style':'italic',
+				fontWeight:'bold'
+			})
+			.html( 'anderer Text');
+
+		 $( '#idloeschen p, .classabsatz + .classabsatz' )
+		 	.css({color:'green'});
+
+		$( 'li:nth-child(2n+1)').css({fontSize:'3em'});
+
+
+		//document.getElementById( 'idabsatz3').className = 'blau';
+		$( '#idabsatz3' )
+			.addClass( 'blau' )
+			.on('click', function() {
+					$(this).toggleClass( 'blau' );
+			});
+
+
+		// document.createElement( 'div' )
+		$( '<div>' )
+			.html( 'das ist neu' )
+			.addClass( 'blau')
+			.on( 'click', function() {
+				 if ( $( this ).hasClass( 'xyz' ) ) {}; 
+				 $(this).parent().appendTo( 'ul' );
+			})
+			.appendTo( 'li' );
+
+
+
+
+});
+	</script>
+	<style>
+	.blau { color:#0000CC; }
+	.fett {font-weight:bold; }
+	</style>
+</head>
+<body>
+	<h3>jQuery DOM Navigation (Traversing) und Manipulation</h3>
+
+<p id="idabsatz1" class="classabsatz">Alter Absatzinhalt.</p>
+<p id="idabsatz2" class="classabsatz">Alter Absatzinhalt.</p>
+<p id="idabsatz3" class="fett">Absatzinhalt.</p>
+<hr>
+
+<img src="bilder/wifi.jpg" alt="Wifi" name="namewifibild">
+<img src="bilder/wifi.gif" alt="Wifi WKO" name="namewifibild">
+
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>JS</li>
+    <li>PHP</li>
+</ul>
+<hr>
+
+<span></span><span></span><span></span>
+
+<div><p><span></span></p></div>
+<hr>
+
+<p id="idabsatz4">Dieser Absatzinhalt wurde gelesen ...</p>
+<p id="idabsatz5">... und hier her geschrieben.</p>
+
+<div id="idloeschen">
+    <p>div mit Kinder löschen ...</p>
+    <p>div mit Kinder löschen ...</p>
+</div>
+<hr>
+
+<a href="http://www.wifiwien.at/" id="idlink">Testlink</a>
+</body>
+</html>

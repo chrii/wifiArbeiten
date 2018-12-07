@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+<head>
+	<title>Javascript Basics</title>
+	<meta charset="utf-8">
+	<script>
+/* Grundlagen Javascript */
+/*
+1. Variablen
+Datentypen: Number, Function
+Geltungsbereich
+Datentyp frei
+
+2. Funktionen
+function() {}
+
+function(a,b) { return a*b; }
+
+*/
+
+var test; // Deklaration
+test = 1;
+test = 'a';
+// NaN, Datentyp Number,
+/*
+1 == 1 => true
+1 == 2 => false
+1 == '1' => true
+1 === '1' => false
+NaN == NaN ==> false
+*/
+
+let test2;
+var tuwas;
+	var intern;
+tuwas = function() {
+
+	alert( i );
+
+	intern = function() {
+		alert( lokal );
+	}
+
+	var lokal; // Funktions-Scope
+
+	for (var i=0;i<=5;i++) {
+
+	}
+	return 5;
+}
+
+var ergebnis = tuwas();
+
+/* 3. bedingte Codeblöcke */
+var zahl = 16;
+if ( zahl > 10 ) {
+
+} else if ( zahl > 5 && zahl < 10 ) {
+
+} else {
+
+}
+
+var istOK = true;
+if (  istOK == true ) {}
+if ( istOK ) {}
+
+/* 4. Schleifen */
+/*for()
+while() {}
+do {} while()*/
+//foreach() // no JS
+
+for ( i = 0; i<=5; i++ ) {}
+var arr = [];
+for ( k in arr ) { var v = arr[k]; }
+for ( v of arr ) {}
+
+/* 5. Array */
+var a = new Array();
+var a = [];
+
+a[0] = 5;
+a[1] = 'a';
+a[2] = [];
+
+a.push('ende');
+alert( a.length );
+a.indexOf( 5 );
+
+/* 6. Objekte */
+var o = new Object();
+var o = {}; // Objektliteral
+//var o = Object.create();
+
+
+o.a1  = 1;
+o.name = 'Hallo Welt';
+o.methode = function() {}
+o.sub = {};
+o.werte = [];
+
+/* 7 und 8: DOM und Eventlistener */
+//window
+/*
+document.getElementById( 'meins' ).innerHTML = '<b>Neuer</b> Text';
+document.getElementById( 'meins' ).style.display = 'none';
+document.getElementById( 'meins' ).className = 'meineCSSKlasse';*/
+
+window.onload = function() {
+	// erst wenn Inhalt fertig geladen ist, sonst Code unten im HTML einfügen!
+	document.getElementById( 'klicker' ).onclick = function() {
+		document.getElementById( 'meins' ).style.color = 'red';
+	}
+}
+
+/* Verketten */
+
+var s = '';
+var x = 1;
+var y = 2;
+var z;
+
+s = 'a' + x + 'b'; // a1b
+s = "a" + x + "b";
+
+
+s = 'a' + x + y + 'b'; //a12b, automatoshe Typumwandlung
+s = 'a' + ( x + y ) + 'b'; // a3b
+
+s = 'a' + z; // aundefined
+s = x + z; // 1 ODER NaN
+s = 'a' + z2; // JS ERROR "not defined"
+
+s = '<option value="'+x+'">';
+
+	</script>
+<!--	<?php
+
+foreach( $arr as $k => $v ) {}
+
+	?> -->
+	<style>
+	</style>
+</head>
+<body>
+	<p id="meins"><span id="klicker">Javascript</span> ist toll!</p>
+	<script>
+
+	</script>
+</body>
+</html>

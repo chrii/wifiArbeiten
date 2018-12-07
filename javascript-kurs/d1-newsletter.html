@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+<head>
+	<title>Javascript Basics</title>
+	<meta charset="utf-8">
+	<script>
+// function erzeugeOptionen(von, bis) {}
+var erzeugeOptionen = function(von,bis) {
+	var html = '', i;
+	if ( von < bis ) {
+		for ( i = von; i <= bis; i++ ) {
+			html += '<option value="'+i+'">'+i+'</option>';
+		}
+	} else {
+		for ( i = von; i >= bis; i-- ) {
+			html += '<option value="'+i+'">'+i+'</option>';
+		}
+	}
+	return html;
+}
+
+var getVal = function( id ) {
+	return document.getElementById( id ).value;
+}
+
+var setClass = function( id, name ) {
+	document.getElementById( id ).className = name;
+}
+
+var checkNumberInString = function( s ) {
+	for ( var i in s ) {
+		// s[i] == Buchstabe
+		if ( isFinite( s[i] ) == true ) { return true; }
+	}
+	return false; // keine Zahl gefunden
+}
+
+window.onload=function() {
+	// Seite ist geladen, Zugriff auf Elemente ist nun OK
+	document.getElementById( 'f_geb_tag' ).innerHTML += erzeugeOptionen(1,31);
+	document.getElementById( 'f_geb_monat' ).innerHTML += erzeugeOptionen(1,12);
+	document.getElementById( 'f_geb_jahr' ).innerHTML += erzeugeOptionen(2018,1918);
+
+  document.getElementById( 'btn_submit' ).onclick = function( event ) {
+		event.preventDefault(); // verhindert das Submit vom Formular
+		console.log( 'Button geklickt' );
+		// Überprüfung
+		// E-Mail: required, @, mind. 7, x@x
+		// Anrede Pflicht
+		// Namen: mind 2, keine Zahlen
+		// Datenschutz: JA
+		// GebDatum mind. 18 Jahre, gültiges Datum
+		// Fehler => Feld rot (CSS Klasse)
+
+		var eingabeFeld = document.getElementById( 'f_email' );
+		// eingabeFeld == <input type="text" id="f_email">
+		var email = eingabeFeld.value;
+		var emailTeile = email.split( '@' ); // ARRAY
+		console.log( emailTeile );
+		if ( email.length < 7 || emailTeile.length != 2 || emailTeile[0].length < 1 || emailTeile[1].length < 5 ) { // length == Anzahl der Buchstaben im String
+			// falsch
+			eingabeFeld.className = 'error';
+		} else {
+			eingabeFeld.className = '';
+		}
+			/*
+		if ( document.getElementById( 'f_email' ).value.length < 7 ) {
+			document.getElementById( 'f_email' ).className = 'error';
+			alert( 'ERROR')
+		}
+		*/
+
+		var vorname = getVal( 'f_vorname');
+		var nachname = getVal( 'f_nachname');
+
+		if ( vorname.length < 2 || checkNumberInString( vorname ) ) {
+			setClass( 'f_vorname', 'error');
+		} else {
+			setClass( 'f_vorname', '');
+		}
+
+		if ( nachname.length < 2 || checkNumberInString( nachname ) ) {
+			setClass( 'f_nachname', 'error');
+		} else {
+			setClass( 'f_nachname', '');
+		}
+
+		//setClass( 'f_nachname', nachname.length < 2 || checkNumberInString( nachname ) ? 'error': '' );
+
+		if ( !document.getElementById( 'f_datenschutz').checked ) {
+			setClass( 'label_datenschutz', 'error');
+		} else {
+				setClass( 'label_datenschutz', '');
+		}
+
+
+			if ( !document.getElementById( 'f_anrede_h').checked && !document.getElementById( 'f_anrede_f').checked ) {
+				setClass( 'label_anrede_1', 'error');
+				setClass( 'label_anrede_2', 'error');
+			} else {
+				setClass( 'label_anrede_1', '');
+				setClass( 'label_anrede_2', '');
+			}
+
+				var tag = getVal( 'f_geb_tag' );
+				var monat = getVal( 'f_geb_monat' );
+				var jahr = getVal( 'f_geb_jahr' );
+				var gebDatum = new Date(jahr, monat-1, tag);
+
+				if ( tag != gebDatum.getDate() || monat != gebDatum.getMonth()+1 || jahr != gebDatum.getFullYear() ) {
+					setClass( 'f_geb_tag', 'error');
+					setClass( 'f_geb_monat', 'error');
+					setClass( 'f_geb_jahr', 'error');
+
+				} else {
+					setClass( 'f_geb_tag', '');
+					setClass( 'f_geb_monat', '');
+					setClass( 'f_geb_jahr', '');
+				}
+
+	}
+
+
+}
+	</script>
+	<style>
+	body, input, select, button { font:20px Arial; }
+	label { width:150px; display:inline-block; }
+	.check label, .radios label { width:auto; }
+	.radios { padding-left:160px; }
+	div { border:solid #ccc; border-width:1px 0; padding:10px; }
+	button { width:200px; line-height:2; margin:20px;}
+	.error { border:1px solid red; }
+	.check .error, .radios .error { border:none; color:red; }
+	</style>
+</head>
+<body>
+	<h1>Newsletter Anmeldung</h1>
+	<form action="?">
+		<div><label>E-Mail</label><input type="text" id="f_email" value="Deine E-Mail"></div>
+		<div class="radios">
+			<label id="label_anrede_1">Herr <input type="radio" name="rb_anrede" id="f_anrede_h"></label>
+			<label id="label_anrede_2">Frau <input type="radio" name="rb_anrede" id="f_anrede_f"></label>
+		</div>
+		<div><label for="f_vorname">Vorname</label><input type="text" id="f_vorname"></div>
+		<div><label>Nachname</label><input type="text" id="f_nachname"></div>
+	  <div>
+				<label>Geburtsdatum</label>
+				<select id="f_geb_tag"><option>Tag</option></select>
+				<select id="f_geb_monat"><option>Monat</option></select>
+				<select id="f_geb_jahr"><option>Jahr</option></select>
+		</div>
+		<div class="check"><label id="label_datenschutz"><input type="checkbox" id="f_datenschutz" value="1"> Datenschutz akzeptiert.</label></div>
+		<button id="btn_submit">Anmelden</button>
+	</form>
+</body>
+</html>
